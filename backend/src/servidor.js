@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const conectarBanco = require("./banco/conexao")
 
 const app = express();
 
@@ -15,7 +16,18 @@ app.get("/api", (req, res) => {
 
 const PORTA = 3000; // porta definida
 
-// iniciando o sservidor
-app.listen(PORTA, () => {
-    console.log(`Servidor rodando na porta ${PORTA}`);
-})
+// servidor so inicia depois que conseguir preparar o banco
+async function iniciarServidor() {
+    try{
+        await conectarBanco();
+
+        // iniciando o sservidor
+        app.listen(PORTA, () => {
+            console.log(`Servidor rodando na porta ${PORTA}`);
+        });
+    } catch (erro){
+        console.error("Erro ao iniciar servidor: ", erro)
+    }
+}
+
+iniciarServidor()
