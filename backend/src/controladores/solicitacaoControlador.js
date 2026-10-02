@@ -99,7 +99,53 @@ async function listarSolicitacoes(req, res) {
     }
 }
 
+async function buscarSolicitacaoPorId(req, res){
+    try{
+
+        const {id} = req.params; // pega o ID que veio na URL
+
+        const banco = await conectarBanco();
+
+        const solicitacao = await banco.get(
+        `
+            SELECT
+                s.id,
+                s.titulo,
+                s.descricao,
+                s.categoria,
+                s.status,
+                s.data_criacao,
+                s.data_atualizacao,
+                u.nome AS solicitante
+            FROM solicitacoes s
+            INNER JOIN usuarios u ON u.id = s.usuario_id
+            WHERE s.id = ?
+        `,
+        [id]
+        );
+
+        //caso nao exista uma solicitação com esse id
+        if(!solicitacao) {
+            return res.status(404).json({
+                mensagem: "Solicitação não encontrada"
+            });
+        }
+
+        return res.json({
+            solicitacao
+        })
+
+    }catch (erro){
+        console.erro("Erro ao buscar solicitação: ", erro);
+
+        return res.status(500);json({
+            mensagem: "Erro interno do servidor"
+        })
+    }
+}
+
 module.exports = {
     criarSolicitacao,
-    listarSolicitacoes
+    listarSolicitacoes,
+    buscarSolicitacaoPorId,
 };
