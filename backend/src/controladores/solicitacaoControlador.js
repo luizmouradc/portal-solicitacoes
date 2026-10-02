@@ -69,6 +69,37 @@ async function criarSolicitacao(req, res) {
     }
 }
 
+async function listarSolicitacoes(req, res) {
+    try{
+        const banco = await conectarBanco()
+
+        // buscando varios registros
+        const solicitacoes = await banco.all(` 
+            SELECT
+                s.id,
+                s.titulo,
+                s.categoria,
+                u.nome AS solicitante,
+                s.data_criacao,
+                s.status
+            FROM solicitacoes s
+            INNER JOIN usuarios u ON u.id = s.usuario_id
+            ORDER BY s.data_criacao DESC            
+            `);
+
+            return res.json({
+                solicitacoes
+            })
+    }catch (erro){
+        console.error("Erro ao listar solicitações: ", erro);
+
+        return res.status(500).json({
+            mensagem: "Erro interno do  servidor"
+        })
+    }
+}
+
 module.exports = {
-    criarSolicitacao
+    criarSolicitacao,
+    listarSolicitacoes
 };
