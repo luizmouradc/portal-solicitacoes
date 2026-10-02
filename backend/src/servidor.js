@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const conectarBanco = require("./banco/conexao")
 const autenticacaoRotas = require("./rotas/autenticacaoRotas");
+const solitacaoRotas = require("./rotas/solicitacaoRotas")
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get("/api", (req, res) => {
 })
 
 app.use("/api/autenticacao", autenticacaoRotas);
+app.use("/api/solicitacoes", solitacaoRotas);
 
 const PORTA = 3000; // porta definida
 
