@@ -1,6 +1,9 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const conectarBanco = require("./banco/conexao")
+const autenticacaoRotas = require("./rotas/autenticacaoRotas");
 
 const app = express();
 
@@ -13,6 +16,8 @@ app.get("/api", (req, res) => {
         mensagem:"API funcionando!"
     })
 })
+
+app.use("/api/autenticacao", autenticacaoRotas);
 
 const PORTA = 3000; // porta definida
 
