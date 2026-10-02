@@ -5,25 +5,23 @@ const {
     listarSolicitacoes,
     buscarSolicitacaoPorId,
     editarSolicitacao,
+    excluirSolicitacao,
 } = require("../controladores/solicitacaoControlador");
 
 const verificarAutenticacao = require("../middlewares/autenticacaoMiddleware");
 
 const router = express.Router()
 
-// Todas as rotas daqui pra baixo exigem autenticação
-router.use(verificarAutenticacao);
+router.use(verificarAutenticacao); // Todas as rotas daqui pra baixo exigem autenticação
 
-// Criar uma nova solicitação
-router.post("/", criarSolicitacao);
+router.post("/", criarSolicitacao); // Criar uma nova solicitação
 
-// Listar todas as solicitações
-router.get("/", listarSolicitacoes);
+router.get("/", listarSolicitacoes); // Listar todas as solicitações
 
-// Consultar uma solicitação específica
-router.get("/:id", buscarSolicitacaoPorId);
+router.get("/:id", buscarSolicitacaoPorId); // Consultar uma solicitação específica
 
-//editar uma solicitação
-router.put("/:id", editarSolicitacao)
+router.put("/:id", editarSolicitacao); //editar uma solicitação
+ 
+router.delete("/:id", excluirSolicitacao); // excluir uma solicitação
 
 module.exports = router;

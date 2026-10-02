@@ -231,9 +231,52 @@ async function editarSolicitacao(req, res) {
     }
 }
 
+async function excluirSolicitacao(req, res){
+    try{
+        const {id} = req.params;
+
+        const banco = await conectarBanco();
+
+        const solicitacao = await banco.get(
+            "SELECT * FROM solicitacoes WHERE id = ?",
+            [id]
+        );
+
+        if(!solicitacao){
+            return res.status(404).json({
+                mensagem: "Solicitação não encontrada."
+            });           
+        }
+
+        // excluir apenas solicitaçoes abertas
+        if (solicitacao.status !== "Aberto"){
+            return res.status(400).json({
+                mensagem: "Apenas solicitações abertas podem ser excluidas"
+            });
+        }
+
+        // excluir a solicitação do banco
+        await banco.run(
+            "DELETE FROM solicitacoes WHERE id = ?",
+            [id]
+        );
+
+        return res.json({
+            mensagem: "Solicitação excluida com sucesso."
+        })
+    }catch (erro){
+        console.error("Erro ao excluir solicitação: ", erro);
+
+        return res.status(500).json({
+            mensagem:"Erro interno do servidor"
+        })
+    }
+}
+
 module.exports = {
     criarSolicitacao,
     listarSolicitacoes,
     buscarSolicitacaoPorId,
     editarSolicitacao,
+    excluirSolicitacao,
 };
