@@ -144,8 +144,96 @@ async function buscarSolicitacaoPorId(req, res){
     }
 }
 
+async function editarSolicitacao(req, res) {
+    try{
+        const {id} = req.params;
+        const {titulo, descricao, categoria} = req.body;
+
+        // verificando se todos os campos foram enviados
+        if(!titulo || !descricao || !categoria){
+            return res.status(400).json({
+                mensagem: "Título, descrição e categoria são obrigatorias"
+            });
+        }
+
+        // verificando se a categoria é permitida
+        if (!categoriasPermitidas.includes(categoria)){
+            return res.status(400).json({
+                mensagem: "Categoria invalida"
+            });
+        }
+
+        const banco = await conectarBanco();
+
+        // primeiro verifica se a solicitação existe
+        const solicitacao = await banco.get(
+            "SELECT * FROM solicitacoes WHERE id = ?",
+            [id]            
+        );
+
+        if(!solicitacao){
+            return res.status(404).json({
+                mensagem: "solicitação não encontrada"
+            });
+        }
+
+        // editar APENAS solitações abertas
+        if(solicitacao.status !== "Aberto"){
+            return res.status(400).json({
+                mensagem:"Apenas solicitações abertas podem ser editadas"
+            })
+        }
+
+        // Atualiza os dados
+        await banco.run(
+        `
+            UPDATE solicitacoes
+            SET
+            titulo = ?,
+            descricao = ?,
+            categoria = ?,
+            data_atualizacao = CURRENT_TIMESTAMP
+            WHERE id = ?
+        `,
+        [titulo, descricao, categoria, id]
+        );
+
+        // Busca novamente pra decolcer os dados ja atualizados
+        const solicitacaoAtualizada = await banco.get(
+            `
+                SELECT
+                s.id,
+                s.titulo,
+                s.descricao,
+                s.categoria,
+                s.status,
+                s.data_criacao,
+                s.data_atualizacao,
+                u.nome AS solicitante
+                FROM solicitacoes s
+                INNER JOIN usuarios u ON u.id = s.usuario_id
+                WHERE s.id = ?
+            `,
+            [id]
+        );
+
+        return res.json({
+            mensagem: "Solicitação atualizada com sucesso",
+            solicitacao: solicitacaoAtualizada
+        })
+
+    }catch (erro){
+        console.error("Erro ao editar solicitação:", erro);
+
+        return res.status(500).json({
+        mensagem: "Erro interno do servidor."
+        });
+    }
+}
+
 module.exports = {
     criarSolicitacao,
     listarSolicitacoes,
     buscarSolicitacaoPorId,
+    editarSolicitacao,
 };

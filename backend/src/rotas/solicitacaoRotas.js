@@ -3,7 +3,8 @@ const express = require("express");
 const {
     criarSolicitacao,
     listarSolicitacoes,
-    buscarSolicitacaoPorId
+    buscarSolicitacaoPorId,
+    editarSolicitacao,
 } = require("../controladores/solicitacaoControlador");
 
 const verificarAutenticacao = require("../middlewares/autenticacaoMiddleware");
@@ -21,5 +22,8 @@ router.get("/", listarSolicitacoes);
 
 // Consultar uma solicitação específica
 router.get("/:id", buscarSolicitacaoPorId);
+
+//editar uma solicitação
+router.put("/:id", editarSolicitacao)
 
 module.exports = router;
