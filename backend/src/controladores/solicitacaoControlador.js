@@ -77,10 +77,19 @@ async function criarSolicitacao(req, res) {
 
 async function listarSolicitacoes(req, res) {
     try{
+
+        // filtros recebidos pela url
+        const{
+            categoria,
+            status,
+            busca,
+            dataInicio,
+            dataFim
+        } = req.query;
+
         const banco = await conectarBanco()
 
-        // buscando varios registros
-        const solicitacoes = await banco.all(` 
+        let consulta = `
             SELECT
                 s.id,
                 s.titulo,
@@ -90,8 +99,42 @@ async function listarSolicitacoes(req, res) {
                 s.status
             FROM solicitacoes s
             INNER JOIN usuarios u ON u.id = s.usuario_id
-            ORDER BY s.data_criacao DESC            
-            `);
+            WHERE 1 = 1
+        `;
+
+        const parametros = [];
+
+        // filtro por categoria
+        if(categoria){
+            consulta += " AND s.categoria = ?";
+            parametros.push(categoria)
+        }
+
+        // filtro por status
+        if(status){
+            consulta += " AND s.status = ?";
+            parametros.push(status)
+        }
+
+        // busca pelo titulo
+        if(busca){
+            consulta += " AND s.titulo LIKE ?";
+            parametros.push(`%${busca}`)
+        }
+
+        if(dataInicio){
+            consulta += " AND DATE(s.data_criacao) >= DATE(?)";
+            parametros.push(dataInicio)
+        }
+
+        if(dataFim){
+            consulta += " AND DATE(s.data_criacao) <= DATE(?)";
+            parametros.push(dataFim)
+        }
+
+        consulta += " ORDER BY s.data_criacao DESC";
+
+        const solicitacoes = await banco.all( consulta , parametros);
 
             return res.json({
                 solicitacoes
