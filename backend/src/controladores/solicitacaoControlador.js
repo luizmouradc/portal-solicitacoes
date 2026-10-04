@@ -23,7 +23,7 @@ async function criarSolicitacao(req, res) {
         // Verifica se os campos obrigatorios foram preenchidos
         if (!titulo || !descricao || !categoria) {
             return res.status(400).json({
-                mensagem: "Categoria inválida"
+                mensagem: "Título, descrição e categoria são obrigatórios"
             });
         }
 

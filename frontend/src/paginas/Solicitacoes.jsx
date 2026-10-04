@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../servicos/api";
 import Cabecalho from "../componentes/Cabecalho";
 import "./Solicitacoes.css";
+import { useNavigate } from "react-router-dom";
 
 function Solicitacoes() {
   const [solicitacoes, setSolicitacoes] = useState([]);
@@ -12,6 +13,7 @@ function Solicitacoes() {
   const [status, setStatus] = useState("");
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     buscarSolicitacoes();
@@ -85,7 +87,14 @@ function Solicitacoes() {
       <Cabecalho />
 
       <main className="conteudo-solicitacoes">
-        <h2>Solicitações</h2>
+
+        <div className="titulo-solicitacoes">
+          <h2>Solicitações</h2>
+
+          <button onClick={() => navigate("/solicitacoes/nova")}>
+            Nova Solicitação
+          </button>
+        </div>
 
         <form className="filtros" onSubmit={aplicarFiltros}>
 

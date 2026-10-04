@@ -4,6 +4,7 @@ import Login from "./paginas/Login";
 import Dashboard from "./paginas/Dashboard";
 import RotaProtegida from "./componentes/RotaProtegida";
 import Solicitacoes from "./paginas/Solicitacoes";
+import NovaSolicitacao from "./paginas/NovaSolicitacao";
 
 function App(){
   return(
@@ -37,6 +38,15 @@ function App(){
             </RotaProtegida>
           }
         />     
+
+        <Route
+          path="/solicitacoes/nova"
+          element={
+            <RotaProtegida>
+              <NovaSolicitacao/>
+            </RotaProtegida>
+          }
+        />
 
       </Routes>
     </BrowserRouter>

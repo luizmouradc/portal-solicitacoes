@@ -18,7 +18,7 @@ function Cabecalho(){
     return (
         <header className="cabecalho">
             <div>
-                <h1>Poral de Solicitações</h1>
+                <h1>Portal de Solicitações</h1>
                 <p>Bem-vindo, {usuario?.nome}</p>
             </div>
 
