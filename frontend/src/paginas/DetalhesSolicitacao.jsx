@@ -3,6 +3,7 @@ import Cabecalho from "../componentes/Cabecalho";
 import "./DetalhesSolicitacao.css"
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import formatarData from "../servicos/formatarData";
 
 function DetalhesSolicitacao() {
     const [solicitacao, setSolicitacao] = useState(null);
@@ -35,7 +36,7 @@ function DetalhesSolicitacao() {
             setSolicitacao(resposta.data.solicitacao);
             setNovoStatus(resposta.data.solicitacao.status);
         } catch (erro) {
-            setErro(erro.response?.data?.mensagem || "Não foi possivel carregar a solicitação");
+            setErro(erro.response?.data?.mensagem || "Não foi possível carregar a solicitação");
         } finally {
             setCarregando(false);
         }
@@ -60,7 +61,7 @@ function DetalhesSolicitacao() {
             setSolicitacao(resposta.data.solicitacao);
         } catch (erro) {
             setErro(
-                erro.response?.data?.mensagem || "Não foi possivel alterar o status"
+                erro.response?.data?.mensagem || "Não foi possível alterar o status"
             )
         }
     }
@@ -151,12 +152,12 @@ function DetalhesSolicitacao() {
 
                             <div>
                                 <strong>Data de criação</strong>
-                                <p>{solicitacao.data_criacao}</p>
+                                <p>{formatarData(solicitacao.data_criacao)}</p>
                             </div>
 
                             <div>
                                 <strong>Última atualização</strong>
-                                <p>{solicitacao.data_atualizacao}</p>
+                                <p>{formatarData(solicitacao.data_atualizacao)}</p>
                             </div>
 
                         </div>

@@ -38,7 +38,7 @@ function Login(){
     return(
         <div className="pagina-login">
             <div className="caixa-login">
-                <h1>Portal de Solitações</h1>
+                <h1>Portal de Solicitações</h1>
 
                 <form onSubmit={entrar}>
                     <label htmlFor="">Usuário</label>
@@ -47,6 +47,7 @@ function Login(){
                         value={usuario}
                         onChange={(evento) => setUsuario(evento.target.value)}
                         placeholder="Digite seu usuário"    
+                        required
                     />
 
                     <label>Senha</label>
@@ -55,6 +56,7 @@ function Login(){
                         value={senha}
                         onChange={(evento) => setSenha(evento.target.value)}
                         placeholder="Digite sua senha"    
+                        required
                     />
 
                     {erro && (

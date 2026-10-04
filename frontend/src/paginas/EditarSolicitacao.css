@@ -4,11 +4,13 @@
 }
 
 .conteudo-editar-solicitacao {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
 }
 
 .formulario-edicao {
-  max-width: 600px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -20,6 +22,7 @@
 .formulario-edicao input,
 .formulario-edicao textarea,
 .formulario-edicao select {
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -46,4 +49,18 @@
 .acoes-edicao button[type="submit"] {
   background: rgb(0, 0, 39);
   color: white;
+}
+
+@media (max-width: 500px) {
+  .formulario-edicao {
+    padding: 20px;
+  }
+
+  .acoes-edicao {
+    flex-direction: column;
+  }
+
+  .acoes-edicao button {
+    width: 100%;
+  }
 }

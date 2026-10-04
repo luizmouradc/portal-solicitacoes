@@ -8,7 +8,7 @@ router.post("/login", login) // mandando usar a função login
 
 router.get("/perfil", verificarAutenticacao, (req, res) => {
     res.json({
-        mensagem: "Usário autenticado",
+        mensagem: "Usuário autenticado",
         usuario: req.usuario
     });
 });

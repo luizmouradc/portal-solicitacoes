@@ -4,6 +4,8 @@
 }
 
 .conteudo-detalhes {
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px;
 }
 
@@ -11,6 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
 }
 
 .titulo-detalhes button {
@@ -21,7 +24,7 @@
 }
 
 .dados-solicitacao {
-  max-width: 700px;
+  width: 100%;
   background: white;
   padding: 25px;
   border-radius: 8px;
@@ -31,16 +34,21 @@
   margin-bottom: 20px;
 }
 
+.dados-solicitacao div:last-child {
+  margin-bottom: 0;
+}
+
 .dados-solicitacao p {
   margin: 5px 0 0;
+  overflow-wrap: anywhere;
 }
 
 .acoes-solicitacao {
-  max-width: 700px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   margin-top: 20px;
 }
 
@@ -51,14 +59,20 @@
 
 .alterar-status select,
 .alterar-status button,
-.botao-excluir {
+.botao-excluir,
+.botao-editar {
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 4px;
 }
 
+.alterar-status select {
+  border: 1px solid #ccc;
+}
+
 .alterar-status button,
-.botao-excluir {
+.botao-excluir,
+.botao-editar {
+  border: none;
   cursor: pointer;
 }
 
@@ -70,13 +84,34 @@
 .botao-excluir {
   background: rgb(255, 26, 26);
   color: white;
-  border: none;
 }
 
 .botao-editar {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
   background: rgb(170, 170, 255);
+}
+
+@media (max-width: 600px) {
+  .titulo-detalhes {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .titulo-detalhes button {
+    width: 100%;
+  }
+
+  .acoes-solicitacao {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .alterar-status {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .acoes-solicitacao button,
+  .alterar-status select {
+    width: 100%;
+  }
 }

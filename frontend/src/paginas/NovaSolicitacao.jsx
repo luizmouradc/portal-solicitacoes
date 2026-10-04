@@ -66,6 +66,7 @@ function NovaSolicitacao() {
             value={titulo}
             onChange={(evento) => setTitulo(evento.target.value)}
             placeholder="Digite o título da solicitação"
+            required
           />
 
           <label>Descrição</label>
@@ -75,6 +76,7 @@ function NovaSolicitacao() {
             onChange={(evento) => setDescricao(evento.target.value)}
             placeholder="Descreva a solicitação"
             rows="5"
+            required
           />
 
           <label>Categoria</label>
@@ -82,6 +84,7 @@ function NovaSolicitacao() {
           <select
             value={categoria}
             onChange={(evento) => setCategoria(evento.target.value)}
+            required
           >
             <option value="">Selecione uma categoria</option>
             <option value="TI">TI</option>

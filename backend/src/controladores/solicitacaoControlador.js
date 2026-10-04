@@ -67,7 +67,7 @@ async function criarSolicitacao(req, res) {
             solicitacao: solicitacaoCriada
         });
     } catch (erro) {
-        console.error("Error ao criar solicitação: ", erro);
+        console.error("Erro ao criar solicitação: ", erro);
 
         return res.status(500).json({
             mensagem: "Erro interno do servidor"
@@ -119,7 +119,7 @@ async function listarSolicitacoes(req, res) {
         // busca pelo titulo
         if(busca){
             consulta += " AND s.titulo LIKE ?";
-            parametros.push(`%${busca}`)
+            parametros.push(`%${busca}%`)
         }
 
         if(dataInicio){
@@ -185,9 +185,9 @@ async function buscarSolicitacaoPorId(req, res){
         })
 
     }catch (erro){
-        console.erro("Erro ao buscar solicitação: ", erro);
+        console.error("Erro ao buscar solicitação: ", erro);
 
-        return res.status(500);json({
+        return res.status(500).json({
             mensagem: "Erro interno do servidor"
         })
     }

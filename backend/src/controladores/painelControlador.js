@@ -1,6 +1,6 @@
 const conectarBanco = require("../banco/conexao");
 
-async function buscarIndicadores(res, res){
+async function buscarIndicadores(req, res){
     try{
         const banco = await conectarBanco();
 
@@ -15,7 +15,7 @@ async function buscarIndicadores(res, res){
 
             return res.json(indicadores);
     } catch (erro){
-        console.error("Error ao buscar indicadores: ", erro);
+        console.error("Erro ao buscar indicadores: ", erro);
 
         return res.status(500).json({
             mensagem: "Erro interno do servidor."

@@ -3,6 +3,7 @@ import api from "../servicos/api";
 import Cabecalho from "../componentes/Cabecalho";
 import "./Solicitacoes.css";
 import { useNavigate } from "react-router-dom";
+import formatarData from "../servicos/formatarData";
 
 function Solicitacoes() {
   const [solicitacoes, setSolicitacoes] = useState([]);
@@ -80,6 +81,22 @@ function Solicitacoes() {
     } finally {
       setCarregando(false);
     }
+  }
+
+  function obterClasseStatus(status) {
+    if (status === "Aberto") {
+      return "status-aberto";
+    }
+
+    if (status === "Em Atendimento") {
+      return "status-atendimento";
+    }
+
+    if (status === "Concluído") {
+      return "status-concluido";
+    }
+
+    return "";
   }
 
   return (
@@ -170,41 +187,47 @@ function Solicitacoes() {
         )}
 
         {!carregando && !erro && (
-          <table className="tabela-solicitacoes">
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Título</th>
-                <th>Categoria</th>
-                <th>Solicitante</th>
-                <th>Data de abertura</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {solicitacoes.map((solicitacao) => (
-                <tr key={solicitacao.id}>
-                  <td>{solicitacao.id}</td>
-                  <td>{solicitacao.titulo}</td>
-                  <td>{solicitacao.categoria}</td>
-                  <td>{solicitacao.solicitante}</td>
-                  <td>{solicitacao.data_criacao}</td>
-                  <td>{solicitacao.status}</td>
-                  <td>
-                    <button
-                      onClick={() =>
-                        navigate(`/solicitacoes/${solicitacao.id}`)
-                      }
-                    >
-                      Ver detalhes
-                    </button>
-                  </td>
+          <div className="tabela-containeer">
+            <table className="tabela-solicitacoes">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Título</th>
+                  <th>Categoria</th>
+                  <th>Solicitante</th>
+                  <th>Data de abertura</th>
+                  <th>Status</th>
+                  <th>Ações</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {solicitacoes.map((solicitacao) => (
+                  <tr key={solicitacao.id}>
+                    <td>{solicitacao.id}</td>
+                    <td>{solicitacao.titulo}</td>
+                    <td>{solicitacao.categoria}</td>
+                    <td>{solicitacao.solicitante}</td>
+                    <td>{formatarData(solicitacao.data_criacao)}</td>
+                    <td>
+                      <span className={`status ${obterClasseStatus(solicitacao.status)}`}>
+                        {solicitacao.status}
+                      </span>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() =>
+                          navigate(`/solicitacoes/${solicitacao.id}`)
+                        }
+                      >
+                        Ver detalhes
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
 
         {!carregando &&

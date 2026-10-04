@@ -4,9 +4,6 @@ import "./Dashboard.css";
 import Cabecalho from "../componentes/Cabecalho";
 
 function Dashboard() {
-  const usuario = JSON.parse(
-    localStorage.getItem("usuario")
-  );
 
   const [indicadores, setIndicadores] = useState({
     total: 0,
@@ -15,7 +12,7 @@ function Dashboard() {
     concluidas: 0
   })
 
-  const [carregando, setCarregado] = useState(true);
+  const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
 
   useEffect(() => {
@@ -36,7 +33,7 @@ function Dashboard() {
     } catch (erro){
       setErro("Não foi possível carregar o dashboard")
     } finally{
-      setCarregado(false)
+      setCarregando(false)
     }
   }
 

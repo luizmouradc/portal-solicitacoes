@@ -4,13 +4,15 @@
 }
 
 .conteudo-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
 }
 
 .cards-dashboard {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
+  gap: 12px;
   margin-top: 20px;
 }
 
@@ -27,4 +29,20 @@
 
 .card-dashboard strong {
   font-size: 50px;
+}
+
+@media (max-width: 900px) {
+  .cards-dashboard {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .cards-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .card-dashboard strong {
+    font-size: 40px;
+  }
 }
