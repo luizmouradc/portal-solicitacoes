@@ -1,11 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../servicos/api";
 import "./Dashboard.css";
+import Cabecalho from "../componentes/Cabecalho";
 
 function Dashboard() {
-  const navigate = useNavigate();
-
   const usuario = JSON.parse(
     localStorage.getItem("usuario")
   );
@@ -42,25 +40,9 @@ function Dashboard() {
     }
   }
 
-  function sair() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("usuario");
-
-    navigate("/login");
-  }
-
   return (
     <div className="pagina-dashboard">
-      <header className="cabecalho">
-        <div>
-          <h1>Poral de Solicitações</h1>
-          <p>Bem-vindo, {usuario?.nome}</p>
-        </div>
-
-        <button onClick={sair}>
-          Sair
-        </button>
-      </header>
+      <Cabecalho />
 
       <main className="conteudo-dashboard">
         <h2>Dashboard</h2>

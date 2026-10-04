@@ -1,0 +1,40 @@
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgb(0, 0, 39);
+  color: white;
+}
+
+.cabecalho h1 {
+  margin: 0;
+}
+
+.cabecalho p {
+  margin-bottom: 0;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+}
+
+menu a:hover{
+    text-decoration: underline;
+}
+
+.cabecalho button {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(255, 26, 26);
+  color: white;
+}

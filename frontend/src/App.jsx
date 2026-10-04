@@ -3,6 +3,7 @@ import { BrowserRouter,Routes, Route, Navigate } from "react-router-dom";
 import Login from "./paginas/Login";
 import Dashboard from "./paginas/Dashboard";
 import RotaProtegida from "./componentes/RotaProtegida";
+import Solicitacoes from "./paginas/Solicitacoes";
 
 function App(){
   return(
@@ -26,7 +27,16 @@ function App(){
               <Dashboard/>
             </RotaProtegida>
           }
-        />        
+        />   
+
+        <Route
+          path="/solicitacoes"
+          element={
+            <RotaProtegida>
+              <Solicitacoes/>
+            </RotaProtegida>
+          }
+        />     
 
       </Routes>
     </BrowserRouter>
