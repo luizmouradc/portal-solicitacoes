@@ -9,6 +9,12 @@ const categoriasPermitidas = [
     "Infraestrutura"
 ]
 
+const statusPermitidos = [
+    "Aberto",
+    "Em Atendimento",
+    "Concluído"
+]
+
 async function criarSolicitacao(req, res) {
     try {
         //Dados enviados pelo usuário
@@ -273,10 +279,87 @@ async function excluirSolicitacao(req, res){
     }
 }
 
+async function alterarStatus(req, res){
+    try{
+        const {id} = req.params;
+        const {status} = req.body;
+
+        // Verificando se o status doi informado
+        if(!status){
+            return res.status(400).json({
+                mensagem:"Status é obrigatorio"
+            });
+        }
+
+        // Verificando se o status enviado é permitido
+        if(!statusPermitidos.includes(status)){
+            return res.status(400).json({
+                mensagem:"Status inválido."
+            });
+        }
+
+        const banco = await conectarBanco();
+
+        // verifca se a solicitação existe
+        const solicitacao = await banco.get(
+            "SELECT * FROM solicitacoes WHERE id = ?",
+            [id]
+        );        
+
+        if (!solicitacao) {
+            return res.status(404).json({
+                mensagem: "Solicitaçao não encontrada"
+            })
+        }
+
+        // atualiza somente o status e a data de atualização
+        await banco.run(
+            `
+            UPDATE solicitacoes
+            SET
+                status = ?,
+                data_atualizacao = CURRENT_TIMESTAMP
+            WHERE id = ?
+            `,
+            [status, id]
+        );
+
+        const solicitacaoAtualizada = await banco.get(
+            `
+            SELECT
+                s.id,
+                s.titulo,
+                s.descricao,
+                s.categoria,
+                s.status,
+                s.data_criacao,
+                s.data_atualizacao,
+                u.nome AS solicitante
+            FROM solicitacoes s
+            INNER JOIN usuarios u ON u.id = s.usuario_id
+            WHERE s.id = ?
+            `,
+            [id]
+        );
+
+        return res.json({
+            mensagem : "Status atualizado com sucesso.",
+            solicitacao: solicitacaoAtualizada
+        })
+    }catch (erro){
+        console.error("Erro ao alterar status:", erro);
+
+        return res.status(500).json({
+            mensagem: "Erro interno do servidor."
+        });
+    }
+}
+
 module.exports = {
     criarSolicitacao,
     listarSolicitacoes,
     buscarSolicitacaoPorId,
     editarSolicitacao,
     excluirSolicitacao,
+    alterarStatus,
 };
