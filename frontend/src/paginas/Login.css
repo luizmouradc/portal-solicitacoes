@@ -1,0 +1,44 @@
+.pagina-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.caixa-login {
+  width: 400px;
+  background: rgb(170, 170, 255);
+  padding: 32px;
+  border-radius: 8px;
+}
+
+.caixa-login h1 {
+  margin-top: 0;
+}
+
+.caixa-login form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.caixa-login input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.caixa-login button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(0, 0, 39);
+  color: white;
+}
+
+.mensagem-erro {
+  margin: 0;
+  color: rgb(151, 0, 0);
+}

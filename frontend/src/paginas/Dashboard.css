@@ -1,0 +1,56 @@
+.pagina-dashboard {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgb(0, 0, 39);
+  color: white;
+}
+
+.cabecalho h1 {
+  margin: 0;
+}
+
+.cabecalho p {
+  margin-bottom: 0;
+}
+
+.cabecalho button {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(255, 26, 26);
+  color: white;
+}
+
+.conteudo-dashboard {
+  padding: 20px;
+}
+
+.cards-dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.card-dashboard {
+  background: rgb(170, 170, 255);
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.card-dashboard span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.card-dashboard strong {
+  font-size: 50px;
+}

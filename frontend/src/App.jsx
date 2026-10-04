@@ -2,6 +2,7 @@ import { BrowserRouter,Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./paginas/Login";
 import Dashboard from "./paginas/Dashboard";
+import RotaProtegida from "./componentes/RotaProtegida";
 
 function App(){
   return(
@@ -20,7 +21,11 @@ function App(){
         
         <Route
           path="/dashboard"
-          element={<Dashboard/>}
+          element={
+            <RotaProtegida>
+              <Dashboard/>
+            </RotaProtegida>
+          }
         />        
 
       </Routes>
