@@ -23,3 +23,47 @@
 .tabela-solicitacoes th {
   background: rgb(170, 170, 255);
 }
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filtros input,
+.filtros select,
+.filtros button{
+  padding: 10px;
+  border:  1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filtros button{
+  cursor:  pointer;
+}
+
+.filtro-data{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.buscar{
+  background-color: rgb(61, 187, 61);
+  color: white
+}
+
+.buscar:hover{
+  background-color: rgb(2, 95, 2);
+}
+
+.limpar{
+  background-color: rgb(232, 91, 91);
+  color: white;
+}
+
+.limpar:hover{
+  background-color: rgb(140, 6, 6);
+}
