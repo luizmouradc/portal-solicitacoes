@@ -1,0 +1,82 @@
+.pagina-detalhes {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.conteudo-detalhes {
+  padding: 20px;
+}
+
+.titulo-detalhes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo-detalhes button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dados-solicitacao {
+  max-width: 700px;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.dados-solicitacao div {
+  margin-bottom: 20px;
+}
+
+.dados-solicitacao p {
+  margin: 5px 0 0;
+}
+
+.acoes-solicitacao {
+  max-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.alterar-status {
+  display: flex;
+  gap: 10px;
+}
+
+.alterar-status select,
+.alterar-status button,
+.botao-excluir {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.alterar-status button,
+.botao-excluir {
+  cursor: pointer;
+}
+
+.alterar-status button {
+  background: rgb(0, 0, 39);
+  color: white;
+}
+
+.botao-excluir {
+  background: rgb(255, 26, 26);
+  color: white;
+  border: none;
+}
+
+.botao-editar {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: rgb(170, 170, 255);
+}

@@ -1,0 +1,49 @@
+.pagina-editar-solicitacao {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.conteudo-editar-solicitacao {
+  padding: 20px;
+}
+
+.formulario-edicao {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.formulario-edicao input,
+.formulario-edicao textarea,
+.formulario-edicao select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.formulario-edicao textarea {
+  resize: vertical;
+}
+
+.acoes-edicao {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.acoes-edicao button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.acoes-edicao button[type="submit"] {
+  background: rgb(0, 0, 39);
+  color: white;
+}

@@ -179,6 +179,7 @@ function Solicitacoes() {
                 <th>Solicitante</th>
                 <th>Data de abertura</th>
                 <th>Status</th>
+                <th>Ações</th>
               </tr>
             </thead>
 
@@ -191,6 +192,15 @@ function Solicitacoes() {
                   <td>{solicitacao.solicitante}</td>
                   <td>{solicitacao.data_criacao}</td>
                   <td>{solicitacao.status}</td>
+                  <td>
+                    <button
+                      onClick={() =>
+                        navigate(`/solicitacoes/${solicitacao.id}`)
+                      }
+                    >
+                      Ver detalhes
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
