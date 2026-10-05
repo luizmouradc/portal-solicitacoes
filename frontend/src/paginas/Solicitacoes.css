@@ -1,164 +1,66 @@
-.pagina-solicitacoes {
+.pagina-nova-solicitacao {
   min-height: 100vh;
   background: #f5f5f5;
 }
 
-.conteudo-solicitacoes {
-  max-width: 1200px;
+.conteudo-nova-solicitacao {
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.titulo-solicitacoes {
+.formulario-solicitacao {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-}
-
-.titulo-solicitacoes button {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background: rgb(0, 0, 39);
-  color: white;
-}
-
-.filtros {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
+  flex-direction: column;
   gap: 10px;
-  margin-bottom: 20px;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
 }
 
-.filtros input,
-.filtros select,
-.filtros button {
+.formulario-solicitacao input,
+.formulario-solicitacao textarea,
+.formulario-solicitacao select {
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.filtros > input,
-.filtros > select {
-  min-width: 170px;
+.formulario-solicitacao textarea {
+  resize: vertical;
 }
 
-.filtros > input[type="text"] {
-  flex: 1;
-  min-width: 220px;
-}
-
-.filtros button {
-  cursor: pointer;
-  border: none;
-}
-
-.filtro-data {
+.acoes-formulario {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.buscar {
-  background-color: rgb(61, 187, 61);
-  color: white;
-}
-
-.buscar:hover {
-  background-color: rgb(2, 95, 2);
-}
-
-.limpar {
-  background-color: rgb(232, 91, 91);
-  color: white;
-}
-
-.limpar:hover {
-  background-color: rgb(140, 6, 6);
-}
-
-.tabela-container {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.tabela-solicitacoes {
-  width: 100%;
-  min-width: 850px;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.tabela-solicitacoes th,
-.tabela-solicitacoes td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.tabela-solicitacoes th {
-  background: rgb(170, 170, 255);
-}
-
-.tabela-solicitacoes tbody tr:hover {
-  background: #f5f5f5;
-}
-
-.tabela-solicitacoes button {
-  padding: 7px 12px;
+.acoes-formulario button {
+  padding: 10px 18px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.acoes-formulario button[type="submit"] {
   background: rgb(0, 0, 39);
   color: white;
-  white-space: nowrap;
 }
 
-.status {
-  display: inline-block;
-  padding: 5px 9px;
-  border-radius: 12px;
-  font-size: 14px;
-  white-space: nowrap;
-}
+@media (max-width: 500px) {
+  .formulario-solicitacao {
+    padding: 20px;
+  }
 
-.status-aberto {
-  background: #e7e7ff;
-}
-
-.status-atendimento {
-  background: #fff3cd;
-}
-
-.status-concluido {
-  background: #d7f5dd;
-}
-
-@media (max-width: 700px) {
-  .titulo-solicitacoes {
+  .acoes-formulario {
     flex-direction: column;
-    align-items: stretch;
-    margin-bottom: 20px;
   }
 
-  .titulo-solicitacoes button {
-    width: 100%;
-  }
-
-  .filtros {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .filtros > input,
-  .filtros > select,
-  .filtro-data,
-  .filtros button {
+  .acoes-formulario button {
     width: 100%;
   }
 }
