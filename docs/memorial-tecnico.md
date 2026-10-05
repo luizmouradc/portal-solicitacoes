@@ -13,6 +13,10 @@ O objetivo foi criar uma aplicação web para registrar e acompanhar solicitaç�
 
 ## 2. Tecnologias utilizadas
 
+### Linguagem
+
+- JavaScript
+
 ### Frontend
 
 - React
@@ -27,14 +31,30 @@ O objetivo foi criar uma aplicação web para registrar e acompanhar solicitaç�
 - Express
 - JSON Web Token (JWT)
 - bcryptjs
+- CORS
+- dotenv
+- sqlite e sqlite3
 
 ### Banco de dados
 
 - SQLite
 
+### Ferramentas de desenvolvimento
+
+- npm
+- Nodemon
+- Git
+- GitHub
+
 ---
 
 ## 3. Justificativa das tecnologias
+
+### JavaScript
+
+O JavaScript foi utilizado tanto no frontend quanto no backend. Isso permitiu trabalhar com a mesma linguagem nas duas partes da aplicação, diminuindo a troca de contexto durante o desenvolvimento e facilitando a integração entre elas.
+
+Para um projeto com prazo curto, essa escolha ajudou na produtividade e deixou a manutenção mais simples, já que a maior parte da aplicação segue a mesma base de linguagem.
 
 ### React
 
@@ -42,9 +62,13 @@ O React foi escolhido para desenvolver a interface por permitir a criação da a
 
 Também facilitou o gerenciamento dos dados exibidos nas páginas utilizando recursos como `useState` e `useEffect`.
 
+Em comparação com uma interface feita apenas com JavaScript e manipulação direta do DOM, a separação em componentes facilita a organização e a manutenção das telas. Para o tamanho deste projeto, também permitiu reaproveitar elementos como o cabeçalho e a rota protegida sem repetir código.
+
 ### Vite
 
 O Vite foi utilizado para criar e executar o projeto React por possuir uma configuração simples e um ambiente de desenvolvimento rápido.
+
+Em comparação com uma configuração manual das ferramentas de build, o Vite reduziu a quantidade de configuração necessária e agilizou o desenvolvimento. Isso foi útil principalmente pelo prazo reduzido do desafio.
 
 ### React Router DOM
 
@@ -52,11 +76,21 @@ Foi utilizado para controlar a navegação entre as páginas da aplicação, com
 
 Também foi utilizado na criação de rotas protegidas para evitar que usuários não autenticados acessem diretamente as páginas internas.
 
+Sem uma biblioteca de roteamento, esse controle teria que ser implementado manualmente. O React Router deixou a navegação centralizada e mais fácil de manter conforme novas páginas fossem adicionadas.
+
 ### Axios
 
 O Axios foi escolhido para realizar a comunicação entre o frontend e a API do backend.
 
 Com ele são realizadas as requisições de login, criação, consulta, edição, exclusão e alteração de status das solicitações.
+
+A API poderia ser consumida utilizando o `fetch` nativo do navegador, mas o Axios permitiu centralizar a configuração do endereço da API e do cabeçalho de autenticação. Isso reduziu repetição de código nas páginas do frontend.
+
+### CSS
+
+O CSS foi utilizado diretamente nos componentes e páginas para construir o layout e os ajustes de responsividade.
+
+Para o escopo do desafio, foi preferido em vez de adicionar uma biblioteca de componentes ou framework de estilos. Dessa forma, a interface continuou simples e o projeto ganhou menos dependências externas.
 
 ### Node.js e Express
 
@@ -64,15 +98,19 @@ O backend foi desenvolvido com Node.js e Express.
 
 O Express foi utilizado para criar as rotas da API e organizar o tratamento das requisições HTTP.
 
-A escolha foi feita principalmente pela simplicidade de integração com o frontend em JavaScript e pela facilidade de criar uma API REST.
+A escolha foi feita principalmente pela simplicidade de integração com o frontend em JavaScript e pela facilidade de criar uma API REST. Em comparação com uma solução que utilizasse outra linguagem no backend, manter JavaScript nas duas partes ajudou na produtividade durante o desenvolvimento.
 
-### SQLite
+A separação entre rotas, controladores, middlewares e acesso ao banco também permite que novas funcionalidades sejam adicionadas sem concentrar toda a lógica em um único arquivo.
+
+### SQLite, sqlite e sqlite3
 
 O SQLite foi escolhido por ser um banco de dados simples e adequado ao tamanho do projeto.
 
-Ele não exige a instalação de um servidor separado e permite que o banco seja criado automaticamente pela própria aplicação.
+Ele não exige a instalação de um servidor separado e permite que o banco seja criado automaticamente pela própria aplicação. Para um projeto de pequeno porte e execução local, isso facilitou a configuração e os testes.
 
-Para um projeto de pequeno porte e execução local, isso facilitou a configuração e os testes.
+Em comparação com PostgreSQL ou MySQL, o SQLite possui uma preparação inicial menor. Por outro lado, bancos cliente-servidor seriam mais adequados em um cenário de produção com maior quantidade de usuários simultâneos.
+
+As bibliotecas `sqlite` e `sqlite3` são utilizadas pelo backend para abrir o arquivo do banco, executar o script de criação das tabelas e realizar as consultas necessárias.
 
 ### JWT
 
@@ -80,11 +118,37 @@ O JSON Web Token é utilizado para controlar a autenticação do usuário.
 
 Depois de realizar o login com sucesso, o backend gera um token que deve ser enviado nas requisições das rotas protegidas.
 
+A opção por JWT evitou a necessidade de manter sessões no servidor para este projeto. Para uma aplicação pequena, isso deixou o fluxo de autenticação simples. Em uma aplicação de produção, a forma de armazenamento e envio do token precisaria receber cuidados adicionais de segurança.
+
 ### bcryptjs
 
 O bcryptjs é utilizado para gerar o hash da senha do usuário.
 
-Dessa forma, a senha não é armazenada diretamente em texto puro no banco de dados.
+Dessa forma, a senha não é armazenada diretamente em texto puro no banco de dados. Em comparação com armazenar a senha diretamente ou utilizar apenas um hash simples, o bcrypt foi escolhido por ser próprio para armazenamento de senhas e utilizar um custo configurável no processo de hash.
+
+### CORS
+
+O CORS foi utilizado no backend para permitir a comunicação entre o frontend e a API durante o desenvolvimento, já que eles são executados em portas diferentes.
+
+No ambiente local foi utilizada uma configuração simples. Em produção, o ideal seria restringir as origens permitidas de acordo com o endereço real do frontend.
+
+### dotenv
+
+O dotenv foi utilizado para carregar configurações através de variáveis de ambiente, como a chave utilizada na geração dos tokens JWT e a porta do servidor.
+
+Isso evita deixar valores de configuração diretamente no código e facilita a utilização de configurações diferentes entre desenvolvimento e produção.
+
+### npm e Nodemon
+
+O npm é utilizado para instalar e gerenciar as dependências do frontend e do backend.
+
+O Nodemon é utilizado apenas durante o desenvolvimento para reiniciar o backend automaticamente quando o código é alterado. Isso não muda o funcionamento final da aplicação, mas melhora a produtividade durante a implementação.
+
+### Git e GitHub
+
+O Git foi utilizado para versionamento do projeto e o GitHub para armazenamento do repositório e entrega do código.
+
+O versionamento permite acompanhar as alterações realizadas e mantém o projeto organizado durante o desenvolvimento.
 
 ---
 
@@ -102,6 +166,10 @@ portal-solicitacoes/
 ```
 
 Essa separação foi utilizada para deixar mais claro o papel de cada parte do sistema.
+
+No backend foi adotada uma separação simples de responsabilidades entre rotas, controladores, middlewares e acesso ao banco. Não foi utilizado um padrão arquitetural complexo, pois o projeto possui escopo reduzido. A intenção foi manter a estrutura fácil de entender e permitir que cada parte tivesse uma responsabilidade bem definida.
+
+No frontend, as telas foram separadas em páginas, os elementos reutilizáveis ficaram em componentes e a comunicação com a API foi concentrada na pasta de serviços.
 
 ---
 
@@ -225,6 +293,8 @@ usuarios.id
 
 Dessa forma, cada solicitação fica relacionada ao usuário que realizou seu cadastro.
 
+A modelagem foi mantida simples porque o sistema possui poucas entidades. As categorias e os status foram tratados como valores controlados pela aplicação, sem a criação de tabelas separadas para eles. Para este escopo isso reduz a complexidade do banco. Em uma evolução com categorias configuráveis ou regras mais complexas, essa modelagem poderia ser revista.
+
 Os detalhes dos campos estão disponíveis no arquivo:
 
 ```text
@@ -259,11 +329,13 @@ A validação realizada pelo backend é a responsável pela proteção efetiva d
 
 A comunicação é realizada através de uma API HTTP.
 
-O frontend utiliza Axios para fazer as requisições para:
+O frontend utiliza Axios para fazer as requisições para a API. No ambiente local, o endereço padrão é:
 
 ```text
 http://localhost:3000/api
 ```
+
+Esse endereço também pode ser configurado pela variável de ambiente `VITE_API_URL`, evitando a necessidade de alterar o código caso frontend e backend sejam publicados em endereços diferentes.
 
 Entre as principais operações estão:
 
@@ -420,7 +492,7 @@ O SQLite poderia ser substituído por um banco de dados como PostgreSQL ou MySQL
 
 A aplicação também deveria utilizar HTTPS e uma configuração mais segura para armazenamento e envio do token de autenticação.
 
-A chave utilizada para gerar os tokens JWT deveria ser configurada através de uma variável de ambiente segura e possuir um valor forte.
+A chave utilizada para gerar os tokens JWT deve ser configurada através de uma variável de ambiente segura e possuir um valor forte. O projeto já utiliza arquivo de exemplo para indicar as variáveis necessárias, sem exigir que o arquivo `.env` real seja versionado.
 
 Também seriam importantes recursos como:
 

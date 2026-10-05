@@ -71,4 +71,7 @@ Cada solicitação pertence a um usuário.
 O relacionamento é feito através do campo:
 
 ```text
-solicitacoes.usuario_id
+solicitacoes.usuario_id -> usuarios.id
+```
+
+O campo `usuario_id` é uma chave estrangeira que referencia o campo `id` da tabela `usuarios`. Dessa forma, cada solicitação fica relacionada ao usuário que realizou seu cadastro.

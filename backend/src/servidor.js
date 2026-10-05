@@ -23,7 +23,7 @@ app.use("/api/autenticacao", autenticacaoRotas);
 app.use("/api/solicitacoes", solicitacaoRotas );
 app.use("/api/dashboard", painelRotas);
 
-const PORTA = 3000; // porta definida
+const PORTA = process.env.PORT || 3000; // usa a porta do ambiente ou 3000 por padrão
 
 // servidor so inicia depois que conseguir preparar o banco
 async function iniciarServidor() {

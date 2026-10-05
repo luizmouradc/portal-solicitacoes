@@ -2,34 +2,28 @@
 
 Projeto desenvolvido como parte de um desafio técnico para uma vaga de Desenvolvedor Full Stack Júnior.
 
-O sistema permite que usuários autenticados criem e acompanhem solicitações internas de diferentes setores da empresa, além de realizar alterações de status, edição, exclusão, filtros e consulta de indicadores.
+O sistema permite que usuários autenticados registrem e acompanhem solicitações internas de diferentes setores da empresa. Também é possível consultar detalhes, editar e excluir solicitações abertas, alterar status, aplicar filtros e visualizar indicadores no dashboard.
 
 ## Funcionalidades
 
 - Login com usuário e senha
 - Autenticação utilizando JWT
+- Controle de sessão e logout
 - Criação de solicitações
 - Listagem de solicitações
 - Consulta dos detalhes de uma solicitação
 - Edição de solicitações abertas
 - Exclusão de solicitações abertas
 - Alteração de status
-- Filtros por:
-  - título
-  - categoria
-  - status
-  - período
-- Dashboard com indicadores:
-  - total de solicitações
-  - abertas
-  - em atendimento
-  - concluídas
+- Filtros por título, categoria, status e período
+- Dashboard com indicadores de solicitações totais, abertas, em atendimento e concluídas
 - Layout responsivo para diferentes tamanhos de tela
 
 ## Tecnologias utilizadas
 
 ### Frontend
 
+- JavaScript
 - React
 - Vite
 - React Router DOM
@@ -40,8 +34,13 @@ O sistema permite que usuários autenticados criem e acompanhem solicitações i
 
 - Node.js
 - Express
-- JWT
+- JSON Web Token (JWT)
 - bcryptjs
+- CORS
+- dotenv
+
+### Banco de dados
+
 - SQLite
 
 ## Estrutura do projeto
@@ -60,6 +59,11 @@ portal-solicitacoes/
 │   └── estrutura.sql
 │
 ├── docs/
+│   ├── evidencias/
+│   ├── dicionario-de-dados.md
+│   ├── dicionario-de-dados.pdf
+│   ├── memorial-tecnico.md
+│   └── memorial-tecnico.pdf
 │
 ├── frontend/
 │   └── src/
@@ -76,13 +80,17 @@ portal-solicitacoes/
 
 Para executar o projeto é necessário ter instalado:
 
-- Node.js
+- Node.js 20.19+ ou 22.12+
 - npm
 - Git
 
-O SQLite utilizado pelo sistema é criado automaticamente pela aplicação, portanto não é necessário instalar ou configurar um servidor de banco de dados.
+A linguagem utilizada no frontend e no backend é JavaScript.
 
-## Como executar o projeto
+O banco de dados utilizado é o SQLite. Não é necessário instalar um servidor de banco de dados separado, pois o arquivo do banco é criado automaticamente pela aplicação.
+
+As dependências do frontend e do backend estão declaradas nos respectivos arquivos `package.json` e são instaladas com `npm install`.
+
+## Instalação
 
 ### 1. Clonar o repositório
 
@@ -91,58 +99,76 @@ git clone https://github.com/luizmouradc/portal-solicitacoes.git
 cd portal-solicitacoes
 ```
 
-### 2. Configurar o backend
-
-Entre na pasta:
+### 2. Instalar o backend
 
 ```bash
 cd backend
-```
-
-Instale as dependências:
-
-```bash
 npm install
 ```
 
-Crie o arquivo `.env` a partir do exemplo disponível:
+### 3. Instalar o frontend
 
-```text
-CHAVE_JWT=sua_chave_aqui
+Em outro terminal, a partir da raiz do projeto:
+
+```bash
+cd frontend
+npm install
 ```
 
-Para execução local, substitua `sua_chave_aqui` por uma chave de sua escolha.
+## Configuração
 
-Exemplo:
+### Backend
+
+Na pasta `backend`, crie um arquivo `.env` com base no arquivo `.env.example`:
 
 ```text
 CHAVE_JWT=chave_portal_solicitacoes
+PORT=3000
 ```
 
-### 3. Criar o usuário inicial
+A variável `CHAVE_JWT` é utilizada para assinar e validar os tokens de autenticação.
 
-Execute:
+A variável `PORT` é opcional. Caso não seja informada, o backend utiliza a porta `3000`.
+
+### Frontend
+
+O frontend utiliza por padrão a API em:
+
+```text
+http://localhost:3000/api
+```
+
+Caso seja necessário utilizar outro endereço, crie um arquivo `.env` dentro da pasta `frontend` com base no `.env.example`:
+
+```text
+VITE_API_URL=http://localhost:3000/api
+```
+
+## Banco de dados e usuário inicial
+
+O arquivo `database/estrutura.sql` contém os comandos de criação das tabelas.
+
+O banco SQLite é criado automaticamente em `database/portal.db` quando a aplicação é executada. Esse arquivo não precisa ser enviado ao repositório, pois cada ambiente pode gerar sua própria base local.
+
+Para criar o usuário de demonstração, execute dentro da pasta `backend`:
 
 ```bash
 npm run criar-usuario
 ```
 
-Esse comando cria o banco de dados, caso ele ainda não exista, e adiciona o usuário utilizado para demonstração.
+Esse comando também cria a estrutura do banco caso ela ainda não exista.
 
-Credenciais:
+## Execução
 
-```text
-Usuário: admin
-Senha: 123456
-```
+### Backend
 
-### 4. Executar o backend
+Dentro da pasta `backend`:
 
 ```bash
 npm run dev
 ```
 
-O servidor ficará disponível em:
+O backend ficará disponível, por padrão, em:
 
 ```text
 http://localhost:3000
@@ -154,21 +180,15 @@ A API utiliza o endereço:
 http://localhost:3000/api
 ```
 
-### 5. Executar o frontend
-
-Abra outro terminal e, a partir da raiz do projeto, acesse:
+Também é possível iniciar sem o Nodemon utilizando:
 
 ```bash
-cd frontend
+npm start
 ```
 
-Instale as dependências:
+### Frontend
 
-```bash
-npm install
-```
-
-Execute:
+Dentro da pasta `frontend`:
 
 ```bash
 npm run dev
@@ -180,46 +200,20 @@ O frontend ficará disponível normalmente em:
 http://localhost:5173
 ```
 
-## Banco de dados
+## Acesso
 
-O projeto utiliza SQLite.
-
-O arquivo:
-
-```text
-database/estrutura.sql
-```
-
-contém a criação das tabelas utilizadas pelo sistema.
-
-Ao iniciar a aplicação, o banco:
-
-```text
-database/portal.db
-```
-
-é criado automaticamente quando necessário.
-
-O arquivo `portal.db` não é enviado ao repositório, pois cada ambiente pode gerar sua própria base local.
-
-## Usuário de demonstração
-
-Para testar o sistema:
+Credenciais de demonstração:
 
 ```text
 Usuário: admin
 Senha: 123456
 ```
 
-Caso o usuário ainda não exista, execute dentro da pasta `backend`:
+Caso o usuário ainda não exista, execute `npm run criar-usuario` dentro da pasta `backend`.
 
-```bash
-npm run criar-usuario
-```
+## Regras principais
 
-## Status das solicitações
-
-As solicitações podem possuir os seguintes status:
+### Status das solicitações
 
 - Aberto
 - Em Atendimento
@@ -227,15 +221,51 @@ As solicitações podem possuir os seguintes status:
 
 Novas solicitações são criadas automaticamente com o status `Aberto`.
 
-Solicitações abertas podem ser editadas ou excluídas.
+Somente solicitações com status `Aberto` podem ser editadas ou excluídas.
 
-## Categorias disponíveis
+### Categorias disponíveis
 
 - TI
 - RH
 - Compras
 - Financeiro
 - Infraestrutura
+
+## Documentação
+
+A documentação complementar está disponível na pasta `docs`:
+
+- [Memorial Técnico de Desenvolvimento](docs/memorial-tecnico.pdf)
+- [Memorial Técnico em Markdown](docs/memorial-tecnico.md)
+- [Dicionário de Dados](docs/dicionario-de-dados.pdf)
+- [Dicionário de Dados em Markdown](docs/dicionario-de-dados.md)
+- [Script de criação do banco de dados](database/estrutura.sql)
+
+## Evidências da aplicação
+
+### Login
+
+![Tela de login](docs/evidencias/01-login.png)
+
+### Dashboard
+
+![Dashboard](docs/evidencias/02-dashboard.png)
+
+### Listagem de solicitações
+
+![Listagem de solicitações](docs/evidencias/03-listagem-solicitacoes.png)
+
+### Nova solicitação
+
+![Tela de nova solicitação](docs/evidencias/04-nova-solicitacao.png)
+
+### Detalhes da solicitação
+
+![Detalhes da solicitação](docs/evidencias/05-detalhes-solicitacao.png)
+
+### Edição da solicitação
+
+![Edição da solicitação](docs/evidencias/06-edicao-solicitacao.png)
 
 ## Autor
 
